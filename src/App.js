@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
-import { Form, Navbar, Nav, NavDropdown, FormControl, Button } from 'react-bootstrap'
+import { Container, Row, Form, Navbar, FormControl, Button } from 'react-bootstrap'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import logo from './logo.svg';
 import Axios from 'axios';
 
-const endpoint = 'https://images-api.nasa.gov';
+const endpoint = "https://images-api.nasa.gov/search?media_type=image";
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       history: [],
       favorites: [],
       images: {},
-      filter: {},
-      result: {}  
+      filter: {}
     };
 
     this.search = this.search.bind(this);
@@ -24,14 +22,26 @@ class App extends Component {
   }
 
   search(query) {
-    Axios.get(endpoint + '/search?q=' + query).then(res => {
-      console.log("memes");
-      this.setState({result: res.data});
+    Axios.get(endpoint + '&q=' + query).then(res => {
+      res = res.data.collection;
+      this.setState({
+        images: res.items,
+        results: {
+          nav: res.links,
+          url: res.url,
+          hits: res.metadata.total_hits
+        }
+      });
     });
+  }
+
+  next(query) {
+    Axios.get()
   }
 
   render() {
     return (
+    <>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand href="#home">
           <img
@@ -51,6 +61,11 @@ class App extends Component {
           </Form>
         </Navbar.Collapse>
       </Navbar>
+
+      <Container>
+        <Row></Row>
+      </Container>
+    </>
     );
   }
 }
