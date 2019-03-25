@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Form, Navbar, FormControl, Modal, Card, Spinner, Image } from 'react-bootstrap'
+import { 
+  Button, 
+  Navbar, 
+  FormControl, 
+  Modal, 
+  Card, 
+  Spinner, 
+  Image } from 'react-bootstrap'
 import InfiniteScroll from 'react-infinite-scroller'
 import Masonry from 'react-masonry-component'
 import {
@@ -64,6 +71,7 @@ class App extends Component {
     this.setState({showModal: false, modalImage: {}});
   }
 
+  //TODO: Implement favorites
   getFavorites() {
     var favs = localStorage.getItem('favorites');
     this.setState({favorites: favs});
@@ -107,7 +115,7 @@ class App extends Component {
               variant="link" 
               onClick={this.showModal.bind(this, image)}
             >
-          <Card style={{ width: '20vw' }} bg="dark" text="white" key={i.toString()}>
+          <Card style={{ width: '21.5vw' }} bg="dark" text="white" key={i.toString()}>
             <Card.Img variant="top" src={image.links[0].href} href={image.links[0].href}/>
             <Card.Body>
               <Card.Title>
