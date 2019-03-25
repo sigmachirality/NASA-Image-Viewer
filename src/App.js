@@ -46,8 +46,23 @@ class App extends Component {
       next: 1,
       showModal: false,
       modalImage: {},
-      page: 1
+      page: 1,
+      width: 0
     };
+    this.updateWindowWidth = this.updateWindowWidth.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowWidth();
+    window.addEventListener('resize', this.updateWindowWidth);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth);
+  }
+
+  updateWindowWidth() {
+    this.setState({ width: window.innerWidth});
   }
 
   applyFilter(event) {
@@ -108,6 +123,16 @@ class App extends Component {
         Loading...
       </h3>
     var items = [];
+    let cardWidth = "";
+    if (this.state.width >= 1280) {
+      cardWidth = "21.5vw";
+    } else if (this.state.width >= 890) {
+      cardWidth = "28vw";
+    } else if (this.state.width >= 675) {
+      cardWidth = "42vw";
+    } else {
+      cardWidth = "80vw";
+    }
     this.state.images.map((image, i) => {
       items.push(
         <Button 
@@ -115,7 +140,7 @@ class App extends Component {
               variant="link" 
               onClick={this.showModal.bind(this, image)}
             >
-          <Card style={{ width: '21.5vw' }} bg="dark" text="white" key={i.toString()}>
+          <Card style={{ width: cardWidth }} bg="dark" text="white" key={i.toString()}>
             <Card.Img variant="top" src={image.links[0].href} href={image.links[0].href}/>
             <Card.Body>
               <Card.Title>
