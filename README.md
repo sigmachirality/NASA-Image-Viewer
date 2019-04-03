@@ -1,4 +1,4 @@
-My submission for Capital One's 2019 Software Summit challenge, which you can find [here](https://www.mindsumo.com/contests/nasa-image-archive).
+My submission for Capital One's 2019 software summit challenge, which you can find [here](https://www.mindsumo.com/contests/nasa-image-archive).
 
 The idea behind my website's design was to keep it as minimalistic as possible - I ended up taking design cues from Pinterest (such as the masonry image layout and the infinite scroll functionality). In line with this design philosophy, the site is fully deployable as a static website.
 
